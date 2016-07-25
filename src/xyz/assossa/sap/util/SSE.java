@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class SteelSeriesEngine {
+public class SSE {
 
     private static String sseAdr;
 

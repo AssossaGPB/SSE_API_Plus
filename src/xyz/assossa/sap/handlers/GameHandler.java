@@ -1,7 +1,7 @@
 package xyz.assossa.sap.handlers;
 
 import org.json.JSONObject;
-import xyz.assossa.sap.util.SteelSeriesEngine;
+import xyz.assossa.sap.util.SSE;
 
 public class GameHandler {
 
@@ -37,13 +37,13 @@ public class GameHandler {
             g.put("game_display_name", name);
         if (colorId != -1)
             g.put("icon_color_id", colorId);
-        SteelSeriesEngine.send("/game_metadata", g.toString());
+        SSE.send("/game_metadata", g.toString());
     }
 
     public void unregister() {
         JSONObject g = new JSONObject();
         g.put("game", game.toUpperCase());
-        SteelSeriesEngine.send("/remove_game", g.toString());
+        SSE.send("/remove_game", g.toString());
     }
 
     public String getGame() {

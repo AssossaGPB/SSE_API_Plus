@@ -1,7 +1,7 @@
 package xyz.assossa.sap.handlers;
 
 import org.json.JSONObject;
-import xyz.assossa.sap.util.SteelSeriesEngine;
+import xyz.assossa.sap.util.SSE;
 
 public class EventBindHandler {
 
@@ -80,14 +80,14 @@ public class EventBindHandler {
         if(iconId != 0)
             e.put("icon_id", iconId);
         e.put("handlers", handler.getJSON());
-        SteelSeriesEngine.send("/bind_game_event", e.toString());
+        SSE.send("/bind_game_event", e.toString());
     }
 
     public void unregister() {
         JSONObject e = new JSONObject();
         e.put("game", game.toUpperCase());
         e.put("event", event.toUpperCase());
-        SteelSeriesEngine.send("/remove_game_event", e.toString());
+        SSE.send("/remove_game_event", e.toString());
     }
 
     public String getGame() {

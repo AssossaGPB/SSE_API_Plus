@@ -1,7 +1,7 @@
 package xyz.assossa.sap.handlers;
 
 import org.json.JSONObject;
-import xyz.assossa.sap.util.SteelSeriesEngine;
+import xyz.assossa.sap.util.SSE;
 
 public class EventRegisterHandler {
 
@@ -70,14 +70,14 @@ public class EventRegisterHandler {
             e.put("max", max);
         if (iconId != 0)
             e.put("icon_id", iconId);
-        SteelSeriesEngine.send("/register_game_event", e.toString());
+        SSE.send("/register_game_event", e.toString());
     }
 
     public void unregister() {
         JSONObject e = new JSONObject();
         e.put("game", game.toUpperCase());
         e.put("event", event.toUpperCase());
-        SteelSeriesEngine.send("/remove_game_event", e.toString());
+        SSE.send("/remove_game_event", e.toString());
     }
 
     public String getGame() {

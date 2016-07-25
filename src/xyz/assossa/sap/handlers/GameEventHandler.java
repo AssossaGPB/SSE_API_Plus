@@ -1,7 +1,7 @@
 package xyz.assossa.sap.handlers;
 
 import org.json.JSONObject;
-import xyz.assossa.sap.util.SteelSeriesEngine;
+import xyz.assossa.sap.util.SSE;
 
 public class GameEventHandler {
 
@@ -24,7 +24,7 @@ public class GameEventHandler {
 
         g.put("data", v.toString());
 
-        SteelSeriesEngine.send("/game_event", g.toString());
+        SSE.send("/game_event", g.toString());
     }
 
     public String getGame() {
