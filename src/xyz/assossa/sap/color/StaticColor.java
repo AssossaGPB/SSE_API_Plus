@@ -1,12 +1,22 @@
-package xyz.assossa.sap.util;
+package xyz.assossa.sap.color;
 
-public class Color {
+import org.json.JSONObject;
+
+public class StaticColor extends Color {
     private int r, g, b;
 
-    public Color(int r, int g, int b) {
+    public StaticColor(int r, int g, int b) {
         this.r = r;
         this.g = g;
         this.b = b;
+    }
+
+    public String getJSON() {
+        JSONObject c = new JSONObject();
+        c.put("red", r);
+        c.put("green", g);
+        c.put("blue", b);
+        return c.toString();
     }
 
     public int getR() {
