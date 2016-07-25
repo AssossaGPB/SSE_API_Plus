@@ -3,70 +3,61 @@ package xyz.assossa.sap.handlers;
 import org.json.JSONObject;
 import xyz.assossa.sap.util.SteelSeriesEngine;
 
-public class EventBindHandler {
+public class EventRegisterHandler {
 
     private String game, event;
     private int min = -1, max = -1, iconId;
-    private EventHandler handler;
 
-    public EventBindHandler(String game, String event, EventHandler handler) {
+    public EventRegisterHandler(String game, String event) {
         this.game = game;
         this.event = event;
-        this.handler = handler;
     }
 
-    public EventBindHandler(String game, String event, EventHandler handler, int min) {
+    public EventRegisterHandler(String game, String event, int min) {
         this.game = game;
         this.event = event;
-        this.handler = handler;
         this.min = min;
     }
 
-    public EventBindHandler(String game, String event, int max, EventHandler handler) {
+    public EventRegisterHandler(String game, int max, String event) {
         this.game = game;
         this.event = event;
         this.max = max;
-        this.handler = handler;
     }
 
-    public EventBindHandler(String game, int iconId, String event, EventHandler handler) {
+    public EventRegisterHandler(int iconId, String game, String event) {
         this.game = game;
         this.event = event;
         this.iconId = iconId;
-        this.handler = handler;
     }
 
-    public EventBindHandler(String game, String event, int min, int max, EventHandler handler) {
+    public EventRegisterHandler(String game, String event, int min, int max) {
         this.game = game;
         this.event = event;
         this.min = min;
         this.max = max;
-        this.handler = handler;
     }
 
-    public EventBindHandler(String game, String event, EventHandler handler, int max, int iconId) {
+    public EventRegisterHandler(String game, int iconId, String event, int max) {
         this.game = game;
         this.event = event;
-        this.handler = handler;
+        this.iconId = iconId;
         this.max = max;
-        this.iconId = iconId;
     }
 
-    public EventBindHandler(String game, String event, int min, EventHandler handler, int iconId) {
+    public EventRegisterHandler(String game, int iconId, int min, String event) {
         this.game = game;
         this.event = event;
-        this.handler = handler;
-        this.min = min;
         this.iconId = iconId;
+        this.min = min;
     }
 
-    public EventBindHandler(String game, String event, int min, int max, int iconId, EventHandler handler) {
+    public EventRegisterHandler(String game, String event, int min, int max, int iconId) {
         this.game = game;
         this.event = event;
         this.min = min;
         this.max = max;
         this.iconId = iconId;
-        this.handler = handler;
     }
 
     public void register() {
@@ -74,13 +65,12 @@ public class EventBindHandler {
         e.put("game", game.toUpperCase());
         e.put("event", event.toUpperCase());
         if (min != -1)
-            e.put("min_value", min);
+            e.put("min", min);
         if (max != -1)
-            e.put("max_value", max);
-        if(iconId != 0)
+            e.put("max", max);
+        if (iconId != 0)
             e.put("icon_id", iconId);
-        e.put("handlers", handler.getJSON());
-        SteelSeriesEngine.send("/bind_game_event", e.toString());
+        SteelSeriesEngine.send("/register_game_event", e.toString());
     }
 
     public void unregister() {
@@ -128,13 +118,5 @@ public class EventBindHandler {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
-    }
-
-    public EventHandler getHandler() {
-        return handler;
-    }
-
-    public void setHandler(EventHandler handler) {
-        this.handler = handler;
     }
 }
