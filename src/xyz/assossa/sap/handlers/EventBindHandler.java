@@ -1,5 +1,6 @@
 package xyz.assossa.sap.handlers;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import xyz.assossa.sap.util.SSE;
 
@@ -77,9 +78,14 @@ public class EventBindHandler {
             e.put("min_value", min);
         if (max != -1)
             e.put("max_value", max);
-        if(iconId != 0)
+        if (iconId != 0)
             e.put("icon_id", iconId);
-        e.put("handlers", handler.getJSON());
+
+        JSONArray a = new JSONArray();
+        a.put(handler.getJSON());
+
+        e.put("handlers", a);
+
         SSE.send("/bind_game_event", e.toString());
     }
 
@@ -87,6 +93,7 @@ public class EventBindHandler {
         JSONObject e = new JSONObject();
         e.put("game", game.toUpperCase());
         e.put("event", event.toUpperCase());
+
         SSE.send("/remove_game_event", e.toString());
     }
 

@@ -16,7 +16,7 @@ public class SSE {
     private static String sseAdr;
 
     public static String getAddress() {
-        if (sseAdr.equals("")) {
+        if (sseAdr == null) {
             String jsonAddressStr = "";
             String corePropsFileName;
             if (System.getProperty("os.name").startsWith("Windows")) {
@@ -47,12 +47,12 @@ public class SSE {
     }
 
     public static void send(String extraAddress, String jsonData) {
-        if (sseAdr.equals(""))
+        if (sseAdr == null)
             getAddress();
         try {
             URL url = new URL(sseAdr + extraAddress);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setReadTimeout(1);
+            connection.setReadTimeout(10);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
             connection.setDoInput(true);

@@ -33,7 +33,7 @@ public class GameHandler {
     public void register() {
         JSONObject g = new JSONObject();
         g.put("game", game.toUpperCase());
-        if (!name.equals(""))
+        if (name != null)
             g.put("game_display_name", name);
         if (colorId != -1)
             g.put("icon_color_id", colorId);
